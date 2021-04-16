@@ -1,9 +1,9 @@
 <template>
   <div class="container mx-auto bg-gray-100">
-    <template v-if="isStarted && index < kukus.length">
+    <template v-if="isStarted && index < hexes.length">
       <main class="p-4 sm:p-6 lg:p-8 ">
         <div class="text-center mb-6">
-          <div class="text-kuku" v-text="currentKuku" />
+          <div class="text-hex" v-text="currentHex" />
         </div>
         <div class="mb-6">
           <template v-if="isAnswerShown">
@@ -32,8 +32,8 @@
         <div class="text-center mb-10">
           <span class="text-2xl" v-text="index+1" />
           /
-          <span class="text-2xl" v-text="kukus.length" />
-          <span v-text="`（のこり${kukus.length - index - 1}）`" />
+          <span class="text-2xl" v-text="hexes.length" />
+          <span v-text="`（のこり${hexes.length - index - 1}）`" />
         </div>
         <div class="flex flex-1 items-center justify-center mb-6">
           <button
@@ -46,7 +46,7 @@
         </div>
       </main>
     </template>
-    <template v-else-if="isStarted && index >= kukus.length">
+    <template v-else-if="isStarted && index >= hexes.length">
       <div class="flex flex-1 items-center justify-center height100">
         <div>
           <button type="button" class="mb-10 inline-flex items-center px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="handleStart">
@@ -81,7 +81,7 @@ export default {
   },
   data () {
     return {
-      kukus: [],
+      hexes: [],
       answers: [],
       index: 0,
       isStarted: false,
@@ -90,8 +90,8 @@ export default {
     }
   },
   computed: {
-    currentKuku () {
-      return this.kukus[this.index]
+    currentHex () {
+      return this.hexes[this.index]
     },
     currentAnswer () {
       return this.answers[this.index]
@@ -107,7 +107,7 @@ export default {
   },
   watch: {
     index () {
-      if (this.isStarted && this.index >= this.kukus.length) {
+      if (this.isStarted && this.index >= this.hexes.length) {
         console.log('clear')
         clearInterval(this.timer)
       }
@@ -136,17 +136,17 @@ export default {
         // })
       })
 
-      const kukus = []
+      const hexes = []
       const answers = []
 
       shuffle(array).forEach((vals) => {
         const num1 = vals
         // const num2 = vals[1]
         answers.push(`${num1.toString(2).padStart(4, '0')}`)
-        kukus.push((num1).toString(16))
+        hexes.push((num1).toString(16))
       })
 
-      this.kukus = kukus
+      this.hexes = hexes
       this.answers = answers
       this.isStarted = true
       this.index = 0
@@ -173,7 +173,7 @@ export default {
   overflow-y: scroll;
 }
 
-.text-kuku {
+.text-hex {
   font-size: 7rem;
 }
 
