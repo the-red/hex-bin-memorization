@@ -61,7 +61,7 @@
     <template v-else>
       <div class="flex flex-col items-center justify-center height100">
         <div class="h-10 text-4xl text-center mb-24">
-          かけ算
+          16進数→2進数
         </div>
         <button type="button" class="inline-flex items-center mb-10 px-4 py-2 border border-transparent shadow-sm text-base font-medium rounded-md text-white bg-indigo-600 hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-offset-2 focus:ring-indigo-500" @click="handleStart">
           はじめる！
@@ -126,22 +126,24 @@ export default {
       }
     },
     handleStart () {
-      const base = [1, 2, 3, 4, 5, 6, 7, 8, 9]
+      // TODO: 00～ffまでの2桁16進数も上級編として選べるように
+      const base = [0x1, 0x2, 0x3, 0x4, 0x5, 0x6, 0x7, 0x8, 0x9, 0xA, 0xB, 0xC, 0xD, 0xE, 0xF]
       const array = []
       base.forEach((num1) => {
-        base.forEach((num2) => {
-          array.push([num1, num2])
-        })
+        array.push(num1)
+        // base.forEach((num2) => {
+        //   array.push([num1, num2])
+        // })
       })
 
       const kukus = []
       const answers = []
 
       shuffle(array).forEach((vals) => {
-        const num1 = vals[0]
-        const num2 = vals[1]
-        answers.push(num1 * num2)
-        kukus.push(`${num1} x ${num2}`)
+        const num1 = vals
+        // const num2 = vals[1]
+        answers.push(`${num1.toString(2).padStart(4, '0')}`)
+        kukus.push((num1).toString(16))
       })
 
       this.kukus = kukus
