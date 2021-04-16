@@ -1,4 +1,6 @@
-# kakezan-kuku-app
+# hex-bin-memorization
+
+16進数→2進数 暗記アプリ
 
 ## Build Setup
 
