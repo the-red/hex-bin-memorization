@@ -143,7 +143,7 @@ export default {
         const num1 = vals
         // const num2 = vals[1]
         answers.push(`${num1.toString(2).padStart(4, '0')}`)
-        hexes.push((num1).toString(16))
+        hexes.push(`0x${(num1).toString(16).toUpperCase()}`)
       })
 
       this.hexes = hexes
